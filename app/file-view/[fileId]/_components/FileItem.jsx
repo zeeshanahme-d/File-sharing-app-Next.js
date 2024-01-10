@@ -15,7 +15,7 @@ const FileItem = ({ file }) => {
 
       <div className='mt-10 flex gap-2 text-gray-600'>
         <div className='flex items-center'>
-          <p>{file?.fileName}</p>
+          <p>{file?.fileName.length > 12 ? (file?.fileName).slice(0,12):file?.fileName}...</p>
           <Image src={'/light.png'} width={20} height={10} alt='' className='w-[20px] h-[20px]' />
         </div>
 
