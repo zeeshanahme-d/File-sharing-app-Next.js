@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { RiMenuFill, RiSearchLine, RiShoppingBagLine, RiCloseLine } from 'react-icons/ri'
+import { RiMenuFill,RiCloseLine } from 'react-icons/ri'
 
 const Header = () => {
 
