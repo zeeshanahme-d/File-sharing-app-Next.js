@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useUser } from '@clerk/nextjs';
 import { Copy } from 'lucide-react';
@@ -12,8 +12,12 @@ const FileForm = ({ file, onPasswordSave }) => {
 
   const [password, setPassword] = useState('');
   const [isPasswordEnabled, setIsPasswordEnabled] = useState(false);
+  const [isDisabled, setisDisabled] = useState(true);
   const [message, setMessage] = useState({ show: false });
 
+  useEffect(() => {
+    setisDisabled(true);
+  }, [isPasswordEnabled]);
 
   //on click copy
   const onClickCopy = () => {
@@ -24,15 +28,35 @@ const FileForm = ({ file, onPasswordSave }) => {
       show: true,
     });
     setTimeout(() => {
-      setMessage({
-        show: false,
-      });
+      resetMessage();
     }, 2000)
   };
 
+  const resetMessage = () => {
+    setMessage({ show: false, });
+  };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value.trim();
+    setPassword(value);
+
+    const showError = (msg) => {
+      setisDisabled(true);
+    };
+
+    if (value.length < 3) {
+      showError('Password must be at least 3 characters.');
+    } else if (value.length > 10) {
+      showError('Password must be no more than 10 characters.');
+    } else {
+      setisDisabled(false);
+    }
+  };
+
+
   return file && (
     <div className='w-full flex flex-col  h-[500px] items-center  border-blue-200 rounded-md border gap-5  py-5 px-2'>
-      <p>Share Url to anyone</p>
+      <p>Share URL to Anyone</p>
       {message.show && <div className='absolute top-0 right-0'>
         <Alert message={message} />
       </div>
@@ -62,9 +86,9 @@ const FileForm = ({ file, onPasswordSave }) => {
             className="w-full bg-gray-50 outline-primary border border-blue-200 text-gray-900 text-base rounded-lg 
             block px-3 py-2"
             placeholder='Password'
-            onChange={(e) => { setPassword(e.target.value) }} />
+            onChange={(e) => handlePasswordChange(e)} />
           <button
-            disabled={password?.length < 3}
+            disabled={isDisabled}
             className='bg-primary px-5 py-1 rounded-lg disabled:bg-gray-300 text-white active:bg-blue-600'
             onClick={() => { onPasswordSave(password) }}>Save
           </button>

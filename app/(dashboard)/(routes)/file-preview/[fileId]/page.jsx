@@ -17,7 +17,7 @@ import Alert from '../../../_components/Alert';
 
 const FilePreview = ({ params }) => {
     const [file, setFile] = useState();
-    const [message, setMessage] = useState({show: false});
+    const [message, setMessage] = useState({ show: false });
 
 
     useEffect(() => {
@@ -42,11 +42,9 @@ const FilePreview = ({ params }) => {
 
 
     const onPasswordSave = async (password) => {
-        console.log("password:", password)
-
         const docRef = doc(db, "fileUpload", params.fileId);
         await updateDoc(docRef, {
-            password: password
+            password: password.trim()
         });
         setMessage({
             status: 'Success',
