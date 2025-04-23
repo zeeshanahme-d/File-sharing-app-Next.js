@@ -16,8 +16,9 @@ const UploadFrom = ({ uploadBtnClick, progress }) => {
     const [isDragging, setIsDragging] = useState(false);
 
     const onFileSelect = (file) => {
-        if (file && file.size > 20_00_000) {
-            setErrorMsg("File Size is Greater than 2 MB.");
+        let maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
+        if (file && file.size > maxFileSize) {
+            setErrorMsg("File size exceeds 10MB. Please upload a smaller file.");
             setTimeout(() => { setErrorMsg(null) }, 3000);
             return;
         } else {
@@ -62,7 +63,7 @@ const UploadFrom = ({ uploadBtnClick, progress }) => {
                     <p className="mb-2 text-xl lg:text-3xl text-gray-500 text-center">
                         <span className="font-semibold">Click to upload</span> or <strong className='text-primary'>drag</strong> and <strong className='text-primary'>drop</strong>
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (Max Size 2MB)</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (Max Size 10MB)</p>
                 </label>
             </div>
 
