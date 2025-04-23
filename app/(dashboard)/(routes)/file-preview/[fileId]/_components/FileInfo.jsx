@@ -8,8 +8,8 @@ const FileInfo = ({ file }) => {
       return (
         <Image
           src={file?.fileUrl || "/file.png"}
-          width={300}
-          height={300}
+          width="100%"
+          height="100%"
           alt="uploaded"
           className="object-contain rounded-lg"
         />
@@ -19,7 +19,7 @@ const FileInfo = ({ file }) => {
         <iframe
           src={file.fileUrl}
           width="100%"
-          height="400px"
+          height="100%"
           className="rounded-lg"
           title="PDF Preview"
         />
