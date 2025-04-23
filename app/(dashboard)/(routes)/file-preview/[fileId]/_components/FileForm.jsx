@@ -31,7 +31,7 @@ const FileForm = ({ file, onPasswordSave }) => {
   };
 
   return file && (
-    <div className='w-full flex flex-col  items-center  border-blue-200 rounded-md border gap-5  py-5 px-2'>
+    <div className='w-full flex flex-col  h-[500px] items-center  border-blue-200 rounded-md border gap-5  py-5 px-2'>
       <p>Share Url to anyone</p>
       {message.show && <div className='absolute top-0 right-0'>
         <Alert message={message} />
