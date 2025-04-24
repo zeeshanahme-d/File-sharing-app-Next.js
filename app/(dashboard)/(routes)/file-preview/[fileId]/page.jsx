@@ -17,13 +17,15 @@ import Alert from '../../../_components/Alert';
 
 const FilePreview = ({ params }) => {
     const [file, setFile] = useState();
+    const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ show: false });
 
 
     useEffect(() => {
-        console.log(params.fileId);
-        params?.fileId && getFileInfo()
-
+        if (params?.fileId) {
+            setLoading(true);
+            getFileInfo();
+        }
     }, []);
 
     const db = getFirestore(app);
@@ -32,11 +34,12 @@ const FilePreview = ({ params }) => {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
             setFile(docSnap.data());
+            setLoading(false);
         } else {
             // docSnap.data() will be undefined in this case
             console.log("No such document!");
+            setLoading(false);
         }
     };
 
@@ -69,8 +72,8 @@ const FilePreview = ({ params }) => {
                 Go to Upload
             </Link>
             <div className='flex-col items-center justify-center flex gap-3 md:flex-row mt-10'>
-                <FileInfo file={file} />
-                <FileForm file={file} onPasswordSave={(password) => onPasswordSave(password)} />
+                <FileInfo file={file} loading={loading} />
+                <FileForm file={file} onPasswordSave={(password) => onPasswordSave(password)} loading={loading} />
             </div>
         </div>
     )
