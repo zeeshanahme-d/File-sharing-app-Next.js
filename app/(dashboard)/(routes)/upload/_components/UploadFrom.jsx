@@ -63,7 +63,7 @@ const UploadFrom = ({ uploadBtnClick, progress }) => {
                     <p className="mb-2 text-xl lg:text-3xl text-gray-500 text-center">
                         <span className="font-semibold">Click to upload</span> or <strong className='text-primary'>drag</strong> and <strong className='text-primary'>drop</strong>
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (Max Size 10MB)</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Upload images, videos, audio files, and PDF documents (e.g. .jpg, .png, .mp4, .mp3, .pdf) supported by your browser. (Max Size 10MB)</p>
                 </label>
             </div>
 
