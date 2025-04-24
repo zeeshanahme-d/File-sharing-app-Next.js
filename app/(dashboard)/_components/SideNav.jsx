@@ -3,14 +3,21 @@
 import { Files, Shield, Upload } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, use, useEffect } from 'react';
 import StateHandler from '../context/stateHandler';
 import Footer from '../../_components/Footer'
 
 const SideNav = () => {
     const [activeIndex, setActiveIndex] = useState();
     const { open, setOpen } = useContext(StateHandler);
-    let router = useRouter()
+    let router = useRouter();
+
+
+    useEffect(() => {
+        const path = window.location.pathname.split('/')[1];
+        const index = menuList.findIndex(item => item.path === '/' + path);
+        setActiveIndex(index);
+    }, [window.location.pathname]);
 
     const menuList = [
         {
