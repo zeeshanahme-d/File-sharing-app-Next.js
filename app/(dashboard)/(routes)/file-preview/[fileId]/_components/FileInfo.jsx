@@ -24,6 +24,26 @@ const FileInfo = ({ file, loading = false }) => {
           title="PDF Preview"
         />
       );
+    } else if (file?.fileType?.startsWith("video")) {
+      return (
+        <video
+          controls
+          className="rounded-lg w-full h-full object-contain"
+        >
+          <source src={file.fileUrl} type={file.fileType} />
+          Your browser does not support the video tag.
+        </video>
+      );
+    } else if (file?.fileType?.startsWith("audio")) {
+      return (
+        <audio
+          controls
+          className="w-full"
+        >
+          <source src={file.fileUrl} type={file.fileType} />
+          Your browser does not support the audio element.
+        </audio>
+      );
     } else {
       return (
         <div className="text-center">
@@ -33,6 +53,7 @@ const FileInfo = ({ file, loading = false }) => {
       );
     }
   };
+
 
   if (loading) {
     return (
